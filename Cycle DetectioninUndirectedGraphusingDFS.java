@@ -1,14 +1,6 @@
 import java.util.*;
 public class Solution {
-    static class Node{
-        int first;
-        int second;
-
-        public Node(int first,int second){
-            this.first=first;
-            this.second=second;
-        }
-    }
+    
     public static String cycleDetection(int[][] edge, int n, int m) {
       
         
