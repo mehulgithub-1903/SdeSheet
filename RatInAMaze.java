@@ -1,4 +1,3 @@
-
 class Solution {
     static String ans;
     static int dr[]=new int[]{0,0,-1,1};
@@ -25,30 +24,16 @@ class Solution {
           ans.add(s);
             return;
         }   
-
+        String k="RLUD";
         for(int i=0;i<4;i++){
-            if(0<=row+dr[i] && row+dr[i]<n && 0<=col+dc[i]&& col+dc[i]<n){
-                if(!visited[row+dr[i]][col+dc[i]] && grid[row+dr[i]][col+dc[i]]!=0){
-                    visited[row+dr[i]][col+dc[i]]=true;
-                    if(dr[i]==0){
-                        if(dc[i]==1){
-                            s+="R";
-                        }else{
-                            s+="L";
-                        }
-                    }
-                    if(dc[i]==0){
-                        if(dr[i]==1){
-                            s+="D";
-                        }else{
-                            s+="U";
-                        }
-                    }
-                    solve(s,grid,visited,n,row+dr[i],col+dc[i],ans);
-                    visited[row+dr[i]][col+dc[i]]=false;
-                    s=s.substring(0,s.length()-1);
-                }
-                
+            int nr=row+dr[i];
+            int nc=col+dc[i];
+
+            if(0<=nr && nr<n && 0<=nc&& nc<n && !visited[nr][nc] && grid[nr][nc]!=0){
+
+                visited[row][col]=true;
+                solve(s+k.charAt(i),grid,visited,n,nr,nc,ans);
+                visited[row][col]=false;
             }
         }
 
