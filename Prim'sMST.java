@@ -24,26 +24,30 @@ public class Solution
                 
         }
 
-        int [] key=new int[v+1];
+        int [] currMinEdgeConnected=new int[v+1];
         Set<Integer> mst=new HashSet<>();
         int parent[]=new int[v+1];
-        Arrays.fill(key,Integer.MAX_VALUE);
+        Arrays.fill(currMinEdgeConnected,Integer.MAX_VALUE);
         Arrays.fill(parent,-1);
 
         parent[1]=-1;
         mst.add(1);
-        key[1]=0;
+        currMinEdgeConnected[1]=0;
+        
         PriorityQueue<Pair> pq=new PriorityQueue<>((Pair a,Pair b)->a.s-b.s);
+        // to pop out min neigh
+
         pq.add(new Pair(1,0));
         while(!pq.isEmpty())
         {
             Pair x=pq.poll();
+            // confirm edge of mst
             mst.add(x.f);
 
             for(Pair ne:adj.get(x.f)){
-                if(!mst.contains(ne.f) && key[ne.f]>ne.s){
+                if(!mst.contains(ne.f) && currMinEdgeConnected[ne.f]>ne.s){
                     parent[ne.f]=x.f;
-                    key[ne.f]=ne.s;
+                    currMinEdgeConnected[ne.f]=ne.s;
                     pq.add(new Pair(ne.f,ne.s));
                 }
             }
@@ -55,7 +59,7 @@ public class Solution
             ArrayList<Integer> al=new ArrayList<>();
             al.add(parent[i]);
             al.add(i);
-            al.add(key[i]);
+            al.add(currMinEdgeConnected[i]);
             ans.add(al);
         }
           
